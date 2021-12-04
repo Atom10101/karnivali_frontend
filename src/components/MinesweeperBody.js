@@ -80,6 +80,10 @@ const MinesweeperBody = (props) => {
     //take user to game selection screen when game is over
     const routeChange = () => { //for end of game
         resetGame();
+        otherPlayerJoined = false;
+        game_session_id = null;
+        otherPlayerName = "Guest"
+        isOtherPlayerGuest = false
         let path = 'game-selection';
         const userDetails = {
             username: props.username,
