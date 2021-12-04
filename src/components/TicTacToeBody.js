@@ -77,7 +77,7 @@ const TicTacToeBody = (props) => {
     var room_code = props.roomNumber
     var player = props.playColor
     console.log('start')
-    let socket = new W3CWebSocket('ws://karnivali.herokuapp.com/ws/game/' + room_code)
+    let socket = new W3CWebSocket('wss://karnivali.herokuapp.com/ws/game/' + room_code)
     setTimeout(() => { console.log("connecting..."); }, 1000);
 
     const routeChange = () => { //for end of game

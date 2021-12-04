@@ -98,7 +98,7 @@ const MinesweeperBody = (props) => {
     console.log("player : " + player);
     console.log("opponent : " + opponent);
 
-    let socket = new W3CWebSocket('ws://karnivali.herokuapp.com/ws/game/' + room_code)
+    let socket = new W3CWebSocket('wss://karnivali.herokuapp.com/ws/game/' + room_code)
     setTimeout(() => { console.log("connecting..."); }, 1000);
 
     //connect server

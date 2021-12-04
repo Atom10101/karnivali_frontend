@@ -37,7 +37,7 @@ export default function RockPaperScissor(props) {
     const [chatMsg, setChatMsg] = useState("")
     const [msgs, setMsgs] = useState("")
 
-    let socket = new W3CWebSocket('ws://karnivali.herokuapp.com/ws/game/rps/' + props.location.state.roomCode)
+    let socket = new W3CWebSocket('wss://karnivali.herokuapp.com/ws/game/rps/' + props.location.state.roomCode)
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
