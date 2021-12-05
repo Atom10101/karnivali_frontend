@@ -72,7 +72,7 @@ const TicTacToeBody = (props) => {
 
     const history = useHistory();
 
-    
+
 
     var room_code = props.roomNumber
     var player = props.playColor
@@ -86,12 +86,14 @@ const TicTacToeBody = (props) => {
         game_session_id = null;
         otherPlayerName = "Guest"
         isOtherPlayerGuest = false
+        //if (socket.readyState == socket.OPEN) {
+        //    socket.close();
+        //}
         let path = 'game-selection';
         const userDetails = {
             username: props.username,
             isGuest: props.isGuest
         }
-        socket.close();
         history.push(path, userDetails);
     }
 
@@ -103,7 +105,7 @@ const TicTacToeBody = (props) => {
                 var data = data = { 'type': 'joined', 'playerName': props.username, 'isGuest': props.isGuest, 'player': props.player }
                 //socket.send(JSON.stringify({ data }))
                 sendMessage(socket, JSON.stringify({ data }))
-                
+
             }
         }
 
@@ -161,7 +163,7 @@ const TicTacToeBody = (props) => {
                         })
                         .then((res) => {
                             console.log("Inside then.........................")
-                            console.log("game session id : "+res.data.game_session_id)
+                            console.log("game session id : " + res.data.game_session_id)
                             console.log(res)
                             game_session_id = res.data.game_session_id
                             if (props.player === "p1") {
@@ -178,7 +180,7 @@ const TicTacToeBody = (props) => {
                 alert("Your opponent just joined, his name is " + otherPlayerName);
                 return;
             }
-            
+
             if (data.payload.reset === "reset") {
                 console.log("in reset")
                 resetGamePlayers[data.payload.player] = data.payload.reset;
@@ -201,7 +203,7 @@ const TicTacToeBody = (props) => {
                 setMessage("Sorry! You lost");
                 playerLost();
 
-                if (!props.isGuest && !isOtherPlayerGuest) { 
+                if (!props.isGuest && !isOtherPlayerGuest) {
                     axiosInstance
                         .post(`gamedata/createOrUpdate_game_score/`, {
                             owner: props.username,
@@ -212,7 +214,7 @@ const TicTacToeBody = (props) => {
                             console.log("Score successfully added")
                         });
                 }
-               
+
 
 
                 //options page
@@ -245,7 +247,7 @@ const TicTacToeBody = (props) => {
             return true;
         }
     }
-    
+
     const waitForOpenConnection = (socket) => {
         return new Promise((resolve, reject) => {
             const maxNumberOfAttempts = 100
@@ -294,7 +296,7 @@ const TicTacToeBody = (props) => {
 
         var count = 0;
         gameState.map((game) => {
-            if (game == "#FFC30F" || game == "#581845") {
+            if (game == "#ff124f" || game == "#120458") {
                 count++;
             }
         })
@@ -399,7 +401,7 @@ const TicTacToeBody = (props) => {
             return;
         }
 
-        
+
 
         var data = {
             'player': player,
@@ -410,7 +412,7 @@ const TicTacToeBody = (props) => {
 
 
 
-        if (gameState[parseInt(i)] != "#FFC30F" && gameState[parseInt(i)] != "#581845") {
+        if (gameState[parseInt(i)] != "#ff124f" && gameState[parseInt(i)] != "120458") {
 
             if (currentTurn == false) {
                 alert("Please wait for the oppsition's turn!!")
@@ -509,8 +511,8 @@ const TicTacToeBody = (props) => {
     function checkForResetOrNewGame() {
         console.log("checkForResetOrNewGame");
         console.log(resetGamePlayers);
-        if (resetGamePlayers['#FFC30F'] !== undefined && resetGamePlayers['#581845'] !== undefined) {
-            if (resetGamePlayers['#FFC30F'] === "reset" && resetGamePlayers['#581845'] === "reset") {
+        if (resetGamePlayers['#ff124f'] !== undefined && resetGamePlayers['#120458'] !== undefined) {
+            if (resetGamePlayers['#ff124f'] === "reset" && resetGamePlayers['#120458'] === "reset") {
                 console.log("resetting")
                 resetGame();
 
@@ -534,22 +536,22 @@ const TicTacToeBody = (props) => {
             <Modal show={show} onHide={handleClose}>
                 <Modal.Title>{message}</Modal.Title>
                 <Modal.Footer>
-                    <Button 
-                        variant="primary" 
+                    <Button
+                        variant="primary"
                         onClick={selectResetGame}
                         onMouseEnter={() => {
                             goPlayAgain();
                         }}
-                        >
+                    >
                         Play again
                     </Button>
-                    <Button 
-                        variant="secondary" 
+                    <Button
+                        variant="secondary"
                         onClick={selectRouteChange}
                         onMouseEnter={() => {
                             goGameSelect();
                         }}
-                        >
+                    >
                         Game Select Screen
                     </Button>
                 </Modal.Footer>
@@ -562,86 +564,86 @@ const TicTacToeBody = (props) => {
                     </ScoreBoard>
                     <BoardContainer>
                         <Board>
-                            <Slot 
-                                style={{ backgroundColor: box1 }} 
-                                data-cell-index="0" 
+                            <Slot
+                                style={{ backgroundColor: box1 }}
+                                data-cell-index="0"
                                 onClick={() => { setText("0", player) }}
                                 onMouseEnter={() => {
                                     gameButton();
                                 }}
-                                ></Slot>
+                            ></Slot>
 
-                            <Slot 
-                                style={{ backgroundColor: box2 }} 
-                                data-cell-index="1" 
+                            <Slot
+                                style={{ backgroundColor: box2 }}
+                                data-cell-index="1"
                                 onClick={() => { setText("1", player) }}
                                 onMouseEnter={() => {
                                     gameButton2();
                                 }}
-                                ></Slot>
+                            ></Slot>
 
-                            <Slot 
-                                style={{ backgroundColor: box3 }} 
-                                data-cell-index="2" 
+                            <Slot
+                                style={{ backgroundColor: box3 }}
+                                data-cell-index="2"
                                 onClick={() => { setText("2", player) }}
                                 onMouseEnter={() => {
                                     gameButton3();
                                 }}
-                                ></Slot>
+                            ></Slot>
 
-                            <Slot 
-                                style={{ backgroundColor: box4 }} 
-                                data-cell-index="3" 
+                            <Slot
+                                style={{ backgroundColor: box4 }}
+                                data-cell-index="3"
                                 onClick={() => { setText("3", player) }}
                                 onMouseEnter={() => {
                                     gameButton4();
                                 }}
-                                ></Slot>
+                            ></Slot>
 
-                            <Slot 
-                                style={{ backgroundColor: box5 }} 
-                                data-cell-index="4" 
+                            <Slot
+                                style={{ backgroundColor: box5 }}
+                                data-cell-index="4"
                                 onClick={() => { setText("4", player) }}
                                 onMouseEnter={() => {
                                     gameButton();
                                 }}
-                                ></Slot>
+                            ></Slot>
 
-                            <Slot 
-                                style={{ backgroundColor: box6 }} 
-                                data-cell-index="5" 
+                            <Slot
+                                style={{ backgroundColor: box6 }}
+                                data-cell-index="5"
                                 onClick={() => { setText("5", player) }}
                                 onMouseEnter={() => {
                                     gameButton2();
                                 }}
-                                ></Slot>
-                                
-                            <Slot 
-                                style={{ backgroundColor: box7 }} 
-                                data-cell-index="6" 
+                            ></Slot>
+
+                            <Slot
+                                style={{ backgroundColor: box7 }}
+                                data-cell-index="6"
                                 onClick={() => { setText("6", player) }}
                                 onMouseEnter={() => {
                                     gameButton3();
                                 }}
-                                ></Slot>
+                            ></Slot>
 
-                            <Slot 
-                                style={{ backgroundColor: box8 }} 
-                                data-cell-index="7" 
+                            <Slot
+                                style={{ backgroundColor: box8 }}
+                                data-cell-index="7"
                                 onClick={() => { setText("7", player) }}
                                 onMouseEnter={() => {
                                     gameButton4();
                                 }}
-                                ></Slot>
+                            ></Slot>
 
-                            <Slot 
-                                style={{ backgroundColor: box9 }} 
-                                data-cell-index="8" 
+                            <Slot
+                                style={{ backgroundColor: box9 }}
+                                data-cell-index="8"
                                 onClick={() => { setText("8", player) }}
                                 onMouseEnter={() => {
                                     gameButton();
                                 }}
-                                ></Slot>
+                            ></Slot>
                         </Board>
                     </BoardContainer>
                 </Game>
